@@ -12,6 +12,13 @@ export default function Overlay() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
 
+  const getAssetUrl = (path) => {
+    if (path.startsWith('/')) {
+      return `${import.meta.env.BASE_URL}${path.slice(1)}`;
+    }
+    return path;
+  };
+
   useEffect(() => {
     if (selectedProject) {
       gsap.fromTo('.project-modal-content', 
@@ -88,7 +95,7 @@ export default function Overlay() {
                 {selectedProject.metric} - {selectedProject.metricSub}
               </div>
             </div>
-            <img src={selectedProject.image} alt={selectedProject.title} className="modal-image" />
+            <img src={getAssetUrl(selectedProject.image)} alt={selectedProject.title} className="modal-image" />
             <div className="modal-body">
               <p className="modal-desc">{selectedProject.description}</p>
               <div className="tags" style={{ marginTop: '1.5rem', marginBottom: '2rem' }}>
@@ -131,7 +138,7 @@ export default function Overlay() {
             <h1 className="hero-title">DAS.</h1>
           </div>
           <h2 className="hero-subtitle">Product Manager. Strategist. Builder.</h2>
-          <a href="/Resume.pdf" className="submit-btn" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem', marginTop: '2rem', pointerEvents: 'auto' }} target="_blank" rel="noreferrer">
+          <a href={getAssetUrl('/Resume.pdf')} className="submit-btn" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem', marginTop: '2rem', pointerEvents: 'auto' }} target="_blank" rel="noreferrer">
             <Download size={20} /> Access Resume
           </a>
         </section>
@@ -160,7 +167,7 @@ export default function Overlay() {
             {projects.map((proj) => (
               <div className="case-study animate-on-scroll" key={proj.id}>
                 <div className="cs-image-container">
-                  <img src={proj.image} alt={proj.title} className="cs-image" />
+                  <img src={getAssetUrl(proj.image)} alt={proj.title} className="cs-image" />
                 </div>
                 <div className="cs-content">
                   <div className="cs-metric">{proj.metric}</div>
