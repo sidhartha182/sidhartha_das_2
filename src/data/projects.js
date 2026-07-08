@@ -120,10 +120,17 @@ export const philosophy = [
 
 export const experience = [
   {
+    id: 0,
+    role: 'Associate Product Manager 2',
+    company: 'Refyne',
+    date: 'May 2026 - Present',
+    details: 'Working in their core lending business and overall app experience and customer journeys.'
+  },
+  {
     id: 1,
     role: 'Associate Product Manager',
     company: 'CASHe',
-    date: 'April 2024 - Present',
+    date: 'April 2024 - May 2026',
     details: 'Productized CollectOnGo, spearheaded CredQuotient (GenAI SaaS), led CredCollect empowering 300+ collectors, and shaped lending policies for 100 Cr disbursals.'
   },
   {
