@@ -41,7 +41,18 @@ export default function Overlay() {
           onComplete: () => setLoading(false)
         });
 
-        tl.to('.progress-bar', { width: '100%', duration: 1.5, ease: 'power3.inOut' })
+        const progressObj = { value: 0 };
+
+        tl.to(progressObj, {
+            value: 100,
+            duration: 1.5,
+            ease: 'power3.inOut',
+            onUpdate: () => {
+              const perc = document.querySelector('.loading-percentage');
+              if (perc) perc.innerHTML = Math.round(progressObj.value) + '%';
+            }
+          }, 0)
+          .to('.progress-bar', { width: '100%', duration: 1.5, ease: 'power3.inOut' }, 0)
           .to('.preloader', { yPercent: -100, duration: 1, ease: 'power4.inOut' })
           .from('.hero-title:not(.animate-on-scroll)', { y: 100, opacity: 0, duration: 1, ease: 'power4.out', stagger: 0.1 }, "-=0.5")
           .from('.hero-subtitle', { y: 50, opacity: 0, duration: 1, ease: 'power4.out' }, "-=0.8");
@@ -75,10 +86,16 @@ export default function Overlay() {
       {/* Preloader */}
       {loading && (
         <div className="preloader">
+          <div className="loader-graphics">
+            <div className="ring ring-1"></div>
+            <div className="ring ring-2"></div>
+            <div className="ring ring-3"></div>
+          </div>
           <div className="preloader-text">INITIALIZING SYSTEM</div>
           <div className="progress-bar-container">
             <div className="progress-bar"></div>
           </div>
+          <div className="loading-percentage">0%</div>
         </div>
       )}
 
